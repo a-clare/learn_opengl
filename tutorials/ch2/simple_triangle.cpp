@@ -30,8 +30,10 @@ int main() {
     We are allocating memory (buffer) on the GPU that we can then index
     or reference by using the vbo int value 
   */
-  unsigned int vbo;
+  unsigned int vbo, vao;
+  glGenVertexArrays(1, &vao);
   glGenBuffers(1, &vbo);
+  glBindVertexArray(vao);
 
   glBindBuffer(GL_ARRAY_BUFFER, vbo);
   /* This sends the vertices data to the GPU. */
@@ -44,6 +46,9 @@ int main() {
     GL_FALSE because the inputs are already normalized (-1 to 1)
     12 (3 * 4 bytes for a float) stride. This is how many bytes until the next attribute in the buffer
     0 because we are starting at the front of the buffer
+
+    NOTE: notice the first 0 (layout) is the same value as the layout value in the 
+    vertex shader source at the top of the program
   */
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
@@ -52,6 +57,7 @@ int main() {
 
   while (!display.Shutdown()) {
     glUseProgram(shader_program);
+    glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     display.Update();
   }
