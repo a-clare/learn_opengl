@@ -44,6 +44,10 @@ void Display::SetClearColor(float r, float g, float b, float a) {
   clear_color_[3] = a;
 }
 
+GLFWwindow* Display::GetWindow(){
+  return window_;
+}
+
 void Display::ResizeCallback(GLFWwindow* window, int width, int height) {
   glViewport(0, 0, width, height);
 }

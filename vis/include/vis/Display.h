@@ -30,6 +30,9 @@ public:
   
   /* Set the clear color on re-draws. (0 to 1 input) */
   void SetClearColor(float r, float g, float b, float a);
+
+  /* Return the window instance */
+  GLFWwindow* GetWindow();
 private:
 
   static void ResizeCallback(GLFWwindow* window, int width, int height);
