@@ -27,11 +27,16 @@ public:
 
   /* Update the GL context, clear screen, swap buffers, etc */
   void Update();
+  
+  /* Set the clear color on re-draws. (0 to 1 input) */
+  void SetClearColor(float r, float g, float b, float a);
 private:
 
   static void ResizeCallback(GLFWwindow* window, int width, int height);
   
   GLFWwindow* window_;
+
+  float clear_color_[4];
 };
 
 #endif

@@ -16,13 +16,18 @@ Display::Display(const std::string& windowName, std::uint16_t width, std::uint16
     /* TODO: What to do on failure, probably throw an exception of some sort? */
     return;
   }
+  /* Set default background clear color to white */
+  clear_color_[0] = 1.0;
+  clear_color_[1] = 1.0;
+  clear_color_[2] = 1.0;
+  clear_color_[3] = 1.0;
 }
 
 bool Display::Shutdown() const {
   if(glfwWindowShouldClose(window_)) {
     return true;
   }
-  glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+  glClearColor(clear_color_[0], clear_color_[1], clear_color_[2], clear_color_[3]);
   glClear(GL_COLOR_BUFFER_BIT);
   return false;
 }
@@ -30,6 +35,13 @@ bool Display::Shutdown() const {
 void Display::Update() {
   glfwSwapBuffers(window_);
   glfwPollEvents();
+}
+
+void Display::SetClearColor(float r, float g, float b, float a) {
+  clear_color_[0] = r;
+  clear_color_[1] = g;
+  clear_color_[2] = b;
+  clear_color_[3] = a;
 }
 
 void Display::ResizeCallback(GLFWwindow* window, int width, int height) {
