@@ -3,3 +3,6 @@ project(learn_opengl)
 
 add_subdirectory(submodules/glad)
 add_subdirectory(submodules/glfw)
+
+add_subdirectory(vis)
+add_subdirectory(tutorials)

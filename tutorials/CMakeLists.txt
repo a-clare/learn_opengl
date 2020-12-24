@@ -1,0 +1,2 @@
+add_executable(ch1_hello_window ch1/hello_window.cpp)
+target_link_libraries(ch1_hello_window vis)
