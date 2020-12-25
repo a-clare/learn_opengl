@@ -6,3 +6,4 @@ add_subdirectory(submodules/glfw)
 
 add_subdirectory(vis)
 add_subdirectory(tutorials)
+add_subdirectory(examples)

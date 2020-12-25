@@ -16,7 +16,7 @@ const char* vs_src =
   "void main(void) {\n"
     "gl_Position = vec4((coord2d.x + offset_x) * scale_x, coord2d.y, 0, 1);\n"
     "f_color = vec4(coord2d.xy / 2.0 + 0.5, 1, 1);\n"
-    "gl_PointSize = max(1.0, sprite);\n"
+    // "gl_PointSize = max(1.0, sprite);\n"
   "}\n";
 
 const char* fs_src = 
@@ -118,13 +118,14 @@ int init_resources() {
 	uniform_sprite = glGetUniformLocation(program, "sprite");
 	uniform_mytexture = glGetUniformLocation(program, "mytexture");
 
-	if (attribute_coord2d == -1 || 
-      uniform_offset_x == -1 || 
-      uniform_scale_x == -1 || 
-      uniform_sprite == -1 || 
-      uniform_mytexture == -1) {
-		return 0;
-  }
+	// if (attribute_coord2d == -1 || 
+  //     uniform_offset_x == -1 || 
+  //     uniform_scale_x == -1 || 
+  //     uniform_sprite == -1 || 
+  //     uniform_mytexture == -1) {
+  //   printf("Returning from invalid attributes\n");
+	// 	return 0;
+  // }
 
 	/* Enable blending */
 	glEnable(GL_BLEND);
