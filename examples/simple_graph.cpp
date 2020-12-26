@@ -16,7 +16,7 @@ const char* vs_src =
   "void main(void) {\n"
     "gl_Position = vec4((coord2d.x + offset_x) * scale_x, coord2d.y, 0, 1);\n"
     "f_color = vec4(coord2d.xy / 2.0 + 0.5, 1, 1);\n"
-    // "gl_PointSize = max(1.0, sprite);\n"
+    "gl_PointSize = 10.0;\n"
   "}\n";
 
 const char* fs_src = 
