@@ -18,3 +18,6 @@ target_link_libraries(transformations vis)
 
 add_executable(transformations_user_control transformations_user_control.cpp)
 target_link_libraries(transformations_user_control vis)
+
+add_executable(coordinate_system coordinate_system.cpp)
+target_link_libraries(coordinate_system vis)
