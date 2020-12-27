@@ -12,3 +12,6 @@ target_link_libraries(colorful_triangle vis)
 
 add_executable(textured_container textured_container.cpp)
 target_link_libraries(textured_container vis)
+
+add_executable(transformations transformations.cpp)
+target_link_libraries(transformations vis)
