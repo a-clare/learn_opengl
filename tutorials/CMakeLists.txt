@@ -21,3 +21,6 @@ target_link_libraries(transformations_user_control vis)
 
 add_executable(coordinate_system coordinate_system.cpp)
 target_link_libraries(coordinate_system vis)
+
+add_executable(cubes cubes.cpp)
+target_link_libraries(cubes vis)
