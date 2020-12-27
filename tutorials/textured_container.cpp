@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
     std::cout << "Could not load " << argv[1] << std::endl;
     return 0;
   }
-  Display display("Simple Triangle", 800, 600);
+  Display display("Textured Container", 800, 600);
   /* First three columns are the NDC (normalized device coordinates) of where
     the image will appear on the screen. 
     Next 3 columns are the colors for each vertex
