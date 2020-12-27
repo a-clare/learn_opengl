@@ -23,13 +23,20 @@ const char *fs_src = "#version 330 core\n"
   "in vec2 TexCoord;\n"
   "out vec4 FragColor;\n"
   "uniform sampler2D texture1;\n"
+  "uniform int useColor;\n"
   "void main()\n"
   "{\n"
-  "   FragColor = texture(texture1, TexCoord);\n"
+  "   if (useColor == 1)\n"
+  "     FragColor = texture(texture1, TexCoord) * vec4(outColor, 1);\n"
+  "   else\n"
+  "     FragColor = texture(texture1, TexCoord);\n"
   "}\n\0";
 
+int use_color;
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 int main(int argc, char* argv[]) {
+  std::cout << "Press 1 to toggle color" << std::endl;
   if (argc < 2) {
     std::cout << "No input path provided for container.jpg" << std::endl;
     std::cout << "Usage would be something like \n ./build/texured_container.cpp /res/container.jpg"
@@ -112,12 +119,27 @@ int main(int argc, char* argv[]) {
   glGenerateMipmap(GL_TEXTURE_2D);
 
   unsigned int shader_program = LoadShaders(vs_src, fs_src);
-
+  int use_color_idx = glGetUniformLocation(shader_program, "useColor");
+  glfwSetKeyCallback(display.GetWindow(), key_callback);
   while (!display.Shutdown()) {
+    glUniform1i(use_color_idx, use_color);
     glUseProgram(shader_program);
+    
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     display.Update();
+  }
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+  if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
+    if (use_color) {
+      use_color = 0;
+    }
+    else {
+      use_color = 1;
+    }
   }
 }
