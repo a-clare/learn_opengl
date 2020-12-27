@@ -15,3 +15,6 @@ target_link_libraries(textured_container vis)
 
 add_executable(transformations transformations.cpp)
 target_link_libraries(transformations vis)
+
+add_executable(transformations_user_control transformations_user_control.cpp)
+target_link_libraries(transformations_user_control vis)
