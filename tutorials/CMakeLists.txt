@@ -1,14 +1,14 @@
 ## Chapter 1
-add_executable(ch1_hello_window ch1/hello_window.cpp)
-target_link_libraries(ch1_hello_window vis)
+add_executable(hello_window hello_window.cpp)
+target_link_libraries(hello_window vis)
 
 ## Chapter 2
-add_executable(ch2_simple_triangle ch2/simple_triangle.cpp)
-target_link_libraries(ch2_simple_triangle vis)
-add_executable(ch2_simple_rectangle_index ch2/simple_rectangle_index.cpp)
-target_link_libraries(ch2_simple_rectangle_index vis)
-add_executable(ch2_colorful_triangle ch2/colorful_triangle.cpp)
-target_link_libraries(ch2_colorful_triangle vis)
+add_executable(simple_triangle simple_triangle.cpp)
+target_link_libraries(simple_triangle vis)
+add_executable(simple_rectangle_index simple_rectangle_index.cpp)
+target_link_libraries(simple_rectangle_index vis)
+add_executable(colorful_triangle colorful_triangle.cpp)
+target_link_libraries(colorful_triangle vis)
 
-add_executable(ch2_textured_container ch2/textured_container.cpp)
-target_link_libraries(ch2_textured_container vis)
+add_executable(textured_container textured_container.cpp)
+target_link_libraries(textured_container vis)
