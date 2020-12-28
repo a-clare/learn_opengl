@@ -27,3 +27,6 @@ target_link_libraries(cubes vis)
 
 add_executable(camera camera.cpp)
 target_link_libraries(camera vis)
+
+add_executable(camera_mouse camera_mouse.cpp)
+target_link_libraries(camera_mouse vis)
