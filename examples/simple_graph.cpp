@@ -7,7 +7,6 @@
 
 const char* vs_src = 
   "#version 330 core\n"
-  // "attribute vec2 coord2d;\n"
   "layout (location = 0) in vec2 coord2d;\n"
   "uniform float offset_x;\n"
   "uniform float scale_x;\n"
@@ -118,15 +117,6 @@ int init_resources() {
 	uniform_sprite = glGetUniformLocation(program, "sprite");
 	uniform_mytexture = glGetUniformLocation(program, "mytexture");
 
-	// if (attribute_coord2d == -1 || 
-  //     uniform_offset_x == -1 || 
-  //     uniform_scale_x == -1 || 
-  //     uniform_sprite == -1 || 
-  //     uniform_mytexture == -1) {
-  //   printf("Returning from invalid attributes\n");
-	// 	return 0;
-  // }
-
 	/* Enable blending */
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -196,6 +186,7 @@ void display_loop() {
 		break;
 	}
 }
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
   if (key == GLFW_KEY_1 && action == GLFW_PRESS) {
