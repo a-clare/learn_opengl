@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(learn_opengl_examples)
 
 set(CMAKE_CXX_STANDARD 14)
+add_subdirectory(tutorials)
 
 add_executable(ie_ogl main.cpp)
 target_link_libraries(ie_ogl glfw glad)
