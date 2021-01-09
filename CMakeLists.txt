@@ -8,4 +8,5 @@ add_subdirectory(submodules/glm)
 
 add_subdirectory(vis)
 add_subdirectory(tutorials)
-add_subdirectory(examples)
+add_subdirectory(random_examples)
+add_subdirectory(learn_opengl_examples)

@@ -9,6 +9,17 @@ As such these will not be a word for word copy of the original implementations a
 
 I created a library `vis` that all the tutorials, and examples will link against. This is where code common across all tutorials will be placed: opening windows, reading shaders, etc
 
+## Random Examples
+
+Implementation of random examples found online. Usually had to modify them to use:
+- Modern OpenGL
+- GLM
+- GLFW
+## Learn OpenGL examples
+
+From: https://learnopengl.com
+Some examples implemented, and maybe slightly changed/experimented with.
+
 ## Submodules
 `git clone git@github.com:AdamTheCanadian/learn_opengl.git`
 `cd learn_opengl`
