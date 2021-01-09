@@ -100,8 +100,8 @@ glm::mat4 viewport_transform(float x, float y, float width, float height, float 
 	int window_width;
 	int window_height;
   glfwGetWindowSize(display.GetWindow(), &window_width, &window_height);
-  window_height *= 2;
-  window_width *= 2;
+  // window_height *= 2;
+  // window_width *= 2;
 	// Calculate how to translate the x and y coordinates:
 	float offset_x = (2.0 * x + (width - window_width)) / window_width;
 	float offset_y = (2.0 * y + (height - window_height)) / window_height;
@@ -124,8 +124,8 @@ void display_loop() {
 	int window_width;
 	int window_height;
   glfwGetWindowSize(display.GetWindow(), &window_width, &window_height);
-  window_height *= 2;
-  window_width *= 2;
+  // window_height *= 2;
+  // window_width *= 2;
 	glUseProgram(program);
 
 	/* ---------------------------------------------------------------- */
