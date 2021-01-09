@@ -9,6 +9,10 @@ As such these will not be a word for word copy of the original implementations a
 
 I created a library `vis` that all the tutorials, and examples will link against. This is where code common across all tutorials will be placed: opening windows, reading shaders, etc
 
+## SB - Super Bible
+
+OpenGL Super Bible
+Following along and my implementations of the SuperBible examples. The authors provide source code however I couldnt get it to work on Mac, and I would rather implement it my self to learn it. Also wanted to use the **vis** library so everything in this repo is common.
 ## Random Examples
 
 Implementation of random examples found online. Usually had to modify them to use:

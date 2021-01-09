@@ -33,6 +33,8 @@ public:
 
   /* Return the window instance */
   GLFWwindow* GetWindow();
+  
+  void GetWindowSize(int& width, int& height);
 private:
 
   static void ResizeCallback(GLFWwindow* window, int width, int height);

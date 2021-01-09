@@ -1,15 +1,21 @@
 #include "vis/Display.h"
+#include "vis/Logger.h"
 
 Display::Display(const std::string& windowName, std::uint16_t width, std::uint16_t height) {
   glfwInit();
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 #ifdef __APPLE__
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
   window_ = glfwCreateWindow(width, height, windowName.c_str(), NULL, NULL);
+  if (window_ == NULL) {
+    LOG_ERROR << "Failed to create window";
+    return;
+  }
+  LOG_INFO << "Created window of size " << width << "x" << height;
   glfwMakeContextCurrent(window_);
   glfwSetFramebufferSizeCallback(window_, &Display::ResizeCallback);
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -46,6 +52,10 @@ void Display::SetClearColor(float r, float g, float b, float a) {
 
 GLFWwindow* Display::GetWindow(){
   return window_;
+}
+
+void Display::GetWindowSize(int& width, int& height) {
+  glfwGetWindowSize(window_, &width, &height);
 }
 
 void Display::ResizeCallback(GLFWwindow* window, int width, int height) {

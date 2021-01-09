@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(vis)
-
+set(CMAKE_CXX_STANDARD 14)
 add_library(vis
   src/Display.cpp
   src/ShaderLoader.cpp)
