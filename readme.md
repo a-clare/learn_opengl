@@ -23,7 +23,8 @@ Implementation of random examples found online. Usually had to modify them to us
 
 From: https://learnopengl.com
 Some examples implemented, and maybe slightly changed/experimented with.
-
+### Tutorials
+These are some examples I did that further extend the Learn OpenGL examples
 ## Submodules
 `git clone git@github.com:AdamTheCanadian/learn_opengl.git`
 `cd learn_opengl`
