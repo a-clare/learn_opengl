@@ -9,3 +9,6 @@ target_link_libraries(single_point vis)
 
 add_executable(single_triangle single_triangle/single_triangle.cpp)
 target_link_libraries(single_triangle vis)
+
+add_executable(animated_triangle animated_triangle/animated_triangle.cpp)
+target_link_libraries(animated_triangle vis)
