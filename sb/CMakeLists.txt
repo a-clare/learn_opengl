@@ -12,3 +12,6 @@ target_link_libraries(single_triangle vis)
 
 add_executable(animated_triangle animated_triangle/animated_triangle.cpp)
 target_link_libraries(animated_triangle vis)
+
+add_executable(color_triangle color_triangle/color_triangle.cpp)
+target_link_libraries(color_triangle vis)
