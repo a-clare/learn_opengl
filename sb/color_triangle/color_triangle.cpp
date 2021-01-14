@@ -58,26 +58,24 @@ int main() {
     0.0f, 1.0f, 0.0f,
     0.0f, 0.0f, 1.0f};
 
-  glCreateVertexArrays(1, &vao);
-  glCreateBuffers(2, buffers);
+  glGenVertexArrays(1, &vao);
+  glGenBuffers(2, buffers);
+  glBindVertexArray(vao);
 
-  // Initialize the first buffer, for position data
-  glNamedBufferStorage(buffers[0], sizeof(positions), positions, 0);
-  // Bind the buffer to the vertex array
-  glVertexArrayVertexBuffer(vao, 0, buffers[0], 0, 3 * sizeof(float));
-  // Tell opengl that the buffer is type float
-  glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, GL_FALSE, 0);
-  glVertexArrayAttribBinding(vao, 0, 0);
-  glEnableVertexArrayAttrib(vao, 0);
+  glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
   
-  glNamedBufferStorage(buffers[1], sizeof(colors), colors, 0);
-  glVertexArrayVertexBuffer(vao, 1, buffers[1], 0, 3 * sizeof(float));
-  glVertexArrayAttribFormat(vao, 1, 3, GL_FLOAT, GL_FALSE, 0);
-  glVertexArrayAttribBinding(vao, 1, 1);
-  glEnableVertexArrayAttrib(vao, 1);
+  glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(1);
+
   while (!display.Shutdown()) {
     /* Drawing of our single triangle */
     glUseProgram(program);
+    glBindVertexArray(vao);
 
     glDrawArrays(GL_TRIANGLES, 0, 3);
     
