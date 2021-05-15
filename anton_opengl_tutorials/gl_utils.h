@@ -11,4 +11,7 @@ GLFWwindow* gl_start_win(const char* winName, int w, int h);
 /* Load a vertex shader from a file. Will attempt to compile shader on load */
 GLuint gl_load_vs_from_file(const char* fn);
 
+/* Load a fragment shader from a file. Will attempt to compile shader on load */
+GLuint gl_load_fs_from_file(const char* fn);
+
 #endif
