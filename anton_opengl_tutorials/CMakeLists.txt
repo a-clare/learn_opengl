@@ -4,7 +4,8 @@ project(anton_opengl_tutorials)
 set(all_examples
   tutorial00
   tutorial01
-  tutorial02)
+  tutorial02
+  tutorial02_changing_color)
 
 foreach(example ${all_examples})
   add_executable(${example} "${example}.c" gl_utils.c)
