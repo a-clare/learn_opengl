@@ -4,6 +4,8 @@
 /* Load a shader from file fn into buf */
 static int load_shader_from_file(const char* fn, char* buf, int bufSize);
 
+static int check_for_shader_errors(GLuint s);
+
 GLFWwindow* gl_start_win(const char* winName, int w, int h) {
   GLFWwindow* ret_win;
   printf("Starting GLFW %s\n", glfwGetVersionString());
@@ -51,15 +53,7 @@ GLuint gl_load_vs_from_file(const char* fn) {
   glShaderSource(vs, 1, &p, NULL);
   glCompileShader(vs);
 
-  /* Check for compile errors */
-  int success = -1;
-  char info_log[512];
-  glGetShaderiv(vs, GL_COMPILE_STATUS, &success);
-  if (!success) {
-    glGetShaderInfoLog(vs, 512, NULL, info_log);
-    printf("Error in compiling shader. \n%s\n", info_log);
-    return 0;
-  }
+  check_for_shader_errors(vs);
 
   return vs;
 }
@@ -80,15 +74,7 @@ GLuint gl_load_fs_from_file(const char* fn) {
   glShaderSource(fs, 1, &p, NULL);
   glCompileShader(fs);
 
-  /* Check for compile errors */
-  int success = -1;
-  char info_log[512];
-  glGetShaderiv(fs, GL_COMPILE_STATUS, &success);
-  if (!success) {
-    glGetShaderInfoLog(fs, 512, NULL, info_log);
-    printf("Error in compiling shader. \n%s\n", info_log);
-    return 0;
-  }
+  check_for_shader_errors(fs);
 
   return fs;
 }
@@ -106,5 +92,18 @@ int load_shader_from_file(const char* fn, char* buf, int bufSize) {
   /* Make sure our string is null terminated */
   buf[cnt] = '\0';
   fclose(f);
+  return 1;
+}
+
+int check_for_shader_errors(GLuint s) {
+  /* Check for compile errors */
+  int success = -1;
+  char info_log[512];
+  glGetShaderiv(s, GL_COMPILE_STATUS, &success);
+  if (!success) {
+    glGetShaderInfoLog(s, 512, NULL, info_log);
+    printf("Error in compiling shader. \n%s\n", info_log);
+    return 0;
+  }
   return 1;
 }
