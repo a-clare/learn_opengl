@@ -1,6 +1,9 @@
 #include "gl_utils.h"
 #include <stdio.h>
 
+/* Load a shader from file fn into buf */
+static int load_shader_from_file(const char* fn, char* buf, int bufSize);
+
 GLFWwindow* gl_start_win(const char* winName, int w, int h) {
   GLFWwindow* ret_win;
   printf("Starting GLFW %s\n", glfwGetVersionString());
@@ -34,20 +37,11 @@ GLFWwindow* gl_start_win(const char* winName, int w, int h) {
 
 GLuint gl_load_vs_from_file(const char* fn) {
   printf("Loading vertex shader %s\n", fn);
-  FILE* f = fopen(fn, "r");
-  if (!f) {
-    printf("Could not open file %s\n", fn);
-    return 0;
-  }
   /* Buffer for reading in data from file */
   char buf[2048];
-  /* Reading data into buf, size 1 byte, and read 2047 of them. We read 2047 to
-    make sure we have a null terminated string */
-  size_t cnt = fread(buf, 1, 2047, f);
-  printf("Read %lu bytes \n", cnt);
-  printf("Src\n%s\n", buf);
-  buf[cnt] = '\0';
-  fclose(f);
+  if (!load_shader_from_file(fn, buf, 2048)) {
+    return 0;
+  }
 
   GLuint vs = glCreateShader(GL_VERTEX_SHADER);
   /* Setting source of shader vs, there is 1 shader in the source, and NULL 
@@ -72,20 +66,11 @@ GLuint gl_load_vs_from_file(const char* fn) {
 
 GLuint gl_load_fs_from_file(const char* fn) {
   printf("Loading fragment shader %s\n", fn);
-  FILE* f = fopen(fn, "r");
-  if (!f) {
-    printf("Could not open file %s\n", fn);
-    return 0;
-  }
   /* Buffer for reading in data from file */
   char buf[2048];
-  /* Reading data into buf, size 1 byte, and read 2047 of them. We read 2047 to
-    make sure we have a null terminated string */
-  size_t cnt = fread(buf, 1, 2047, f);
-  printf("Read %lu bytes \n", cnt);
-  printf("Src\n%s\n", buf);
-  buf[cnt] = '\0';
-  fclose(f);
+  if (!load_shader_from_file(fn, buf, 2048)) {
+    return 0;
+  }
 
   GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
   /* Setting source of shader vs, there is 1 shader in the source, and NULL 
@@ -106,4 +91,20 @@ GLuint gl_load_fs_from_file(const char* fn) {
   }
 
   return fs;
+}
+
+int load_shader_from_file(const char* fn, char* buf, int bufSize) {
+  printf("Loading shader %s\n", fn);
+  FILE* f = fopen(fn, "r");
+  if (!f) {
+    printf("Could not open file %s\n", fn);
+    return 0;
+  }
+  size_t cnt = fread(buf, 1, bufSize - 1, f);
+  printf("Read %lu bytes \n", cnt);
+  printf("Src\n%s\n", buf);
+  /* Make sure our string is null terminated */
+  buf[cnt] = '\0';
+  fclose(f);
+  return 1;
 }
