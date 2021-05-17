@@ -6,9 +6,10 @@ set(all_examples
   tutorial01
   tutorial02
   tutorial02_changing_color
-  tutorial04)
+  tutorial04
+  tutorial05)
 
 foreach(example ${all_examples})
-  add_executable(${example} "${example}.c" gl_utils.c)
+  add_executable(${example} "${example}.c" gl_utils.c math_utils.c)
   target_link_libraries(${example} glad glfw)
 endforeach()
