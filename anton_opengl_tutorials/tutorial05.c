@@ -101,22 +101,21 @@ int main() {
   float cam_yaw_speed = 10.0f;                // 10 degrees per second
   float cam_yaw       = 0.0f;                 // y-rotation in degrees
 
-  mat4 I = mat4_identity();
+  mat4 T, R, view;
   vec3 cam_pos;
-  cam_pos.v[0] = 0.0f;
-  cam_pos.v[1] = 0.0f;
-  cam_pos.v[2] = 2.0f;
-  mat4 T = mat4_translate(&I, &cam_pos);
-
-  mat4 R              = rotate_y_deg( identity_mat4(), -cam_yaw );
-  mat4 view_mat       = R * T;
+  cam_pos.v[0] = -0.0f;
+  cam_pos.v[1] = -0.0f;
+  cam_pos.v[2] = -2.0f;
+  mat4_translate(&T, &cam_pos);
+  mat4_rotate_y(&R, -cam_yaw);
+  mat4_mult(&view, &R, &T);
 
   /* get location numbers of matrices in shader programme */
   GLint view_mat_location = glGetUniformLocation(program, "view" );
   GLint proj_mat_location = glGetUniformLocation(program, "proj" );
 
   glUseProgram(program);
-  glUniformMatrix4fv( view_mat_location, 1, GL_FALSE, view_mat.m );
+  glUniformMatrix4fv( view_mat_location, 1, GL_FALSE, view.m );
   glUniformMatrix4fv( proj_mat_location, 1, GL_FALSE, proj_mat );
 
   glEnable(GL_CULL_FACE);
@@ -138,6 +137,48 @@ int main() {
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glfwPollEvents();
+
+    int cam_moved = 0;
+    if ( glfwGetKey(win, GLFW_KEY_A ) ) {
+      cam_pos.v[0] -= cam_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_D ) ) {
+      cam_pos.v[0] += cam_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_PAGE_UP ) ) {
+      cam_pos.v[1] += cam_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_PAGE_DOWN ) ) {
+      cam_pos.v[1] -= cam_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_W ) ) {
+      cam_pos.v[2] -= cam_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_S ) ) {
+      cam_pos.v[2] += cam_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_LEFT ) ) {
+      cam_yaw += cam_yaw_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    if ( glfwGetKey( win, GLFW_KEY_RIGHT ) ) {
+      cam_yaw -= cam_yaw_speed * elapsed_seconds;
+      cam_moved = 1;
+    }
+    /* update view matrix */
+    if ( cam_moved ) {
+      mat4_translate(&T, &cam_pos);
+      mat4_rotate_y(&R, -cam_yaw);
+      mat4_mult(&view, &R, &T);
+      glUniformMatrix4fv( view_mat_location, 1, GL_FALSE, view.m );
+    }
+
     glfwSwapBuffers(win);
   }
 }

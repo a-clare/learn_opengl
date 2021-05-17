@@ -37,8 +37,16 @@ typedef struct {
   float q[4];
 } versor;
 
+void mat4_zero(mat4* m);
 void mat4_identity(mat4 *m);
 /* Create a translation matrix m with a translation vector v */
 void mat4_translate(mat4* m, const vec3* v);
+/* Create a rotation matrix that rotates around Y by deg */
+void mat4_rotate_y(mat4* m, double deg);
+/* m = rhs */
+void mat4_copy(mat4* m, const mat4* rhs);
+
+/* r = m1 * m2 */
+void mat4_mult(mat4* r, const mat4* m1, const mat4* m2);
 
 #endif
